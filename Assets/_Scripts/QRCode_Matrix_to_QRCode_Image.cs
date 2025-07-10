@@ -2,12 +2,15 @@ using OpenCVForUnity.CoreModule;
 using OpenCVForUnity.ImgprocModule;
 using OpenCVForUnity.UnityUtils;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class QRCode_Matrix_to_QRCode_Image : MonoBehaviour
 {
     public RawImage rawImage;
     public Texture2D texture;
+
+    public UnityEvent<Texture2D> newTexture2D = new UnityEvent<Texture2D>();
 
     public int facteur = 10;
     public int marge = 3;
@@ -70,5 +73,7 @@ public class QRCode_Matrix_to_QRCode_Image : MonoBehaviour
 
         // Assigner la texture au RawImage
         rawImage.texture = texture;
+
+        newTexture2D.Invoke(texture);
     }
 }
